@@ -8,10 +8,8 @@ body {
   margin: 0;
   background-color: black;
 }
-
 .earth {
-  display: grid;
-  place-items: center;
+  padding: 1px;
+  margin: 0;
   height: 100vh;
-  cursor: grabbing;
 }

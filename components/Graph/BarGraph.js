@@ -1,32 +1,27 @@
 "use client";
-import React, { useRef } from 'react';
+import React from 'react';
+import StackedToGroupedBarsGraph from './bar';
 
 
 const BarLineGraph = () => {
-      const data = [
-  { month: 'Jan', cost: 100 },
-  { month: 'Feb', cost: 150 },
-  { month: 'Mar', cost: 200 },
-  { month: 'Apr', cost: 180 },
-  { month: 'May', cost: 250 },
-  { month: 'Jun', cost: 300 },
-  { month: 'Jul', cost: 280 },
-  { month: 'Aug', cost: 320 },
-  { month: 'Sep', cost: 350 },
-  { month: 'Oct', cost: 400 },
-  { month: 'Nov', cost: 380 },
-  { month: 'Dec', cost: 420 },
-];
-
-// Calculate the maximum cost for scaling
-const maxCost = Math.max(...data.map(item => item.cost));
-
-return (
-  <div className='min-h-screen'>
-    <h1 className="text-4xl text-white underline underline-offset-8">Explore Our Solutions</h1>
-    
-  </div>
-);
+  const xz = Array.from(Array(58).keys()); // Array from 0 to 57
+  const yz = [
+    Array.from({ length: 58 }, () => Math.random()), // Sample data for yz arrays
+    Array.from({ length: 58 }, () => Math.random()),
+    Array.from({ length: 58 }, () => Math.random()),
+    Array.from({ length: 58 }, () => Math.random()),
+    Array.from({ length: 58 }, () => Math.random())
+  ];
+  const n = 5; // Number of series
+  return (
+    <div>
+      <h1 className="text-4xl text-white mt-16 mb-32 ml-20 underline underline-offset-8">Explore Our Solutions</h1>
+      <div className="flex justify-center items-center">
+        <StackedToGroupedBarsGraph xz={xz} yz={yz} n={n} />
+      </div>
+    </div>
+  );
 };
+
 
 export default BarLineGraph;

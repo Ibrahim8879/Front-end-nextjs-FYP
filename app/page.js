@@ -2,14 +2,20 @@ import Model_page from "@/components/Model_s/model"
 import Card_Section from "@/components/Card/Main_card_page"
 import BarLineGraph from "@/components/Graph/BarGraph"
 import Footer from "@/components/footer"
+import LoadingSpinner from "@/components/Loading"
+import { Suspense } from "react"
 
 export default function Home() {
 
   return (
     <div>
-      <Model_page/>
+      <Suspense fallback={<LoadingSpinner/>}>
+        <Model_page/>
+      </Suspense>
       <Card_Section/>
-      <BarLineGraph/>
+      <Suspense fallback={<LoadingSpinner/>}>
+        <BarLineGraph/>
+      </Suspense>
       <Footer/>
     </div>
   )

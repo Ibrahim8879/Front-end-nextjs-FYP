@@ -1,7 +1,6 @@
 "use client";
-import React from 'react';
+import React, { Suspense } from 'react';
 import StackedToGroupedBarsGraph from './bar';
-
 
 const BarLineGraph = () => {
   const xz = Array.from(Array(58).keys()); // Array from 0 to 57
@@ -12,7 +11,7 @@ const BarLineGraph = () => {
     Array.from({ length: 58 }, () => Math.random()),
     Array.from({ length: 58 }, () => Math.random())
   ];
-  const n = 5; // Number of series
+  const n = 5;
   return (
     <div>
       <h1 className="text-4xl text-white mt-16 mb-32 ml-20 underline underline-offset-8">Explore Our Solutions</h1>

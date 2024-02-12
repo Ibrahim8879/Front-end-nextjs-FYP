@@ -10,6 +10,9 @@ module.exports = {
       backgroundImage: {
 
       },
+      minHeight: {
+        '128': '90vh',
+      },
     },
   },
   plugins: [],

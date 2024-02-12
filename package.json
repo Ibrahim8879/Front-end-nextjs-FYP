@@ -9,8 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/joy": "^5.0.0-beta.28",
     "@react-three/drei": "^9.93.1",
     "@react-three/fiber": "^8.15.14",
+    "mui": "^0.0.1",
     "next": "14.0.4",
     "react": "^18",
     "react-chartjs-2": "^5.2.0",

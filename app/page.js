@@ -13,9 +13,7 @@ export default function Home() {
         <Model_page/>
       </Suspense>
       <Card_Section/>
-      <Suspense fallback={<LoadingSpinner/>}>
-        <BarLineGraph/>
-      </Suspense>
+      <BarLineGraph/>
       <Footer/>
     </div>
   )

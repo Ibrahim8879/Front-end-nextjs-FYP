@@ -8,12 +8,14 @@ import { Suspense } from "react"
 export default function Home() {
 
   return (
-    <div>
+    <div >
       <Suspense fallback={<LoadingSpinner/>}>
         <Model_page/>
       </Suspense>
-      <Card_Section/>
-      <BarLineGraph/>
+      <div className="p-2">
+        <Card_Section/>
+        <BarLineGraph/>
+      </div>
       <Footer/>
     </div>
   )

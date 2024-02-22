@@ -3,12 +3,12 @@ import Image from 'next/image';
 import AspectRatio from '@mui/joy/AspectRatio';
 import Button from '@mui/joy/Button';
 import Card from '@mui/joy/Card';
-import Box from '@mui/joy/Box';
 import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
 import { CardCover } from '@mui/joy';
+import Link from "next/link";
 
-const Mui_Card = ({ imageUrl, title, description }) => {
+const Mui_Card = ({ imageUrl, title, description, linkref }) => {
     return (
       <Card color="neutral" orientation="vertical" variant="soft" sx={{ width: 320, backgroundColor: '#171717', backgroundImage: 'linear-gradient(to bottom, rgba(23, 23, 23, 1), rgba(23, 23, 23, 0.8))' }}>
         <AspectRatio minHeight="120px" maxHeight="200px">
@@ -32,7 +32,9 @@ const Mui_Card = ({ imageUrl, title, description }) => {
             aria-label="Explore Bahamas Islands"
             sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
           >
-            Explore
+            <Link href={linkref}>
+              Explore
+            </Link>
           </Button>
         </CardContent>
       </Card>

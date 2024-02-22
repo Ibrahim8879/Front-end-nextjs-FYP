@@ -54,7 +54,7 @@ const Model = () => {
   });
 
 
-  const gltf = useLoader(GLTFLoader, '/ea/scene.gltf');
+  const gltf = useLoader(GLTFLoader, '/earth/scene.gltf');
 
   return (
     <mesh ref={modelRef}>

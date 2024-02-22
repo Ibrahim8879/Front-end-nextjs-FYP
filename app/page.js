@@ -14,7 +14,6 @@ export default function Home() {
       </Suspense>
       <div className="p-2">
         <Card_Section/>
-        <BarLineGraph/>
       </div>
       <Footer/>
     </div>

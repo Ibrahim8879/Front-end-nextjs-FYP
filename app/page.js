@@ -1,6 +1,5 @@
 import Model_page from "@/components/Model_s/model"
 import Card_Section from "@/components/Card/Main_card_page"
-import BarLineGraph from "@/components/Graph/BarGraph"
 import Footer from "@/components/footer"
 import LoadingSpinner from "@/components/Loading"
 import { Suspense } from "react"

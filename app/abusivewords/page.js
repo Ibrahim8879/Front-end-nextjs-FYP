@@ -1,11 +1,39 @@
-import React from 'react'
+"use client"
+import React, { useState, useEffect }from 'react'
+import GetBarChart from '@/components/Graph/Barchart'
+import LoadingSpinner from "@/components/Loading"
 
 const Abusive_Words = () => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:5000/abusivewords');
+        const jsonData = await response.json();
+        setData(jsonData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
-    <div className='text-white'>
-      Abusive_Words
-    </div>
-  )
-}
+        <div className="container mx-auto p-4 pt-20">
+        <h1 className="text-2xl font-bold mb-4 text-white">Abusive Words Analysis</h1>
+         <div className="mt-8 p-4 border border-gray-700 rounded items-center">
+         {data && data.length > 0 ? (
+            <div>
+              <GetBarChart data={data} />
+            </div>
+          ) : (
+            <LoadingSpinner />
+          )}
+         </div>
+       </div>
+  );
+};
 
 export default Abusive_Words

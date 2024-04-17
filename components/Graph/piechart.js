@@ -19,7 +19,7 @@ echarts.use([
   LabelLayout
 ]);
 
-const GetPieChart = ({ name, value1, value2 }) => {
+const GetPieChart = ({ name, value1, value2, value3 }) => {
     const chartId = `chart-${name}`;
   
     useEffect(() => {
@@ -55,6 +55,7 @@ const GetPieChart = ({ name, value1, value2 }) => {
             data: [
               { value: value1, name: 'Positive' },
               { value: value2, name: 'Negative' },
+              { value: value3, name: 'Neutral' },
             ].sort(function (a, b) {
               return a.value - b.value;
             }),

@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect }from 'react'
-import GetBarChart from '@/components/Graph/Influ_Barchart'
+import Table_for_influ from '@/components/Graph/Influ_Barchart'
 import LoadingSpinner from "@/components/Loading"
 
 const Influence_Analysis = () => {
@@ -11,6 +11,7 @@ const Influence_Analysis = () => {
       try {
         const response = await fetch('http://127.0.0.1:5000/influence');
         const jsonData = await response.json();
+        console.log(jsonData)
         setData(jsonData);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -26,7 +27,7 @@ const Influence_Analysis = () => {
          <div className="mt-8 p-4 border border-gray-700 rounded items-center">
          {data && data.length > 0 ? (
             <div>
-              <GetBarChart data={data} />
+              <Table_for_influ data={data} />
             </div>
           ) : (
             <LoadingSpinner />

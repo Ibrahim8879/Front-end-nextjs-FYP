@@ -11,7 +11,14 @@ const Abusive_Words = () => {
       try {
         const response = await fetch('http://127.0.0.1:5000/abusivewords');
         const jsonData = await response.json();
-        setData(jsonData);
+        const sortedData = jsonData.sort((a, b) => b.total_count - a.total_count);
+        const modifiedData = sortedData.map((item) => {
+          const modifiedWords = item.all_words.map((word) => {
+            return word.charAt(0) + '*'.repeat(word.length - 1);
+          });
+          return { ...item, all_words: modifiedWords };
+        });
+        setData(modifiedData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }

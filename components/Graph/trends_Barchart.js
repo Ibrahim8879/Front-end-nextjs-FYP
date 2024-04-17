@@ -1,91 +1,85 @@
 "use client"
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts/core';
-import { CanvasRenderer } from 'echarts/renderers';
+import { BarChart } from 'echarts/charts';
 import {
   TitleComponent,
   TooltipComponent,
   GridComponent,
   LegendComponent,
 } from 'echarts/components';
+import { CanvasRenderer } from 'echarts/renderers';
+import 'echarts/theme/macarons'; // Optional: Use a theme for the chart
 
-// Import necessary charts
-import { BarChart } from 'echarts/charts';
-
-// Use necessary components
+// Register necessary components
 echarts.use([
   TitleComponent,
   TooltipComponent,
   GridComponent,
   LegendComponent,
   BarChart,
-  CanvasRenderer, // or SVGRenderer if you prefer
+  CanvasRenderer,
 ]);
 
-const GetBarChart = ({ data , text }) => {
+const GetBarChart = ({ data }) => {
+  const chartRef = useRef(null);
+  console.log(data)
   useEffect(() => {
-    const chartDom = document.getElementById('main');
-    const myChart = echarts.init(chartDom, "dark");
+    if (chartRef.current) {
+      const chart = echarts.init(chartRef.current);
 
-    const colors = ['#5470C6', '#91CC75', '#EE6666', '#73C0DE', '#3BA272'];
+      const sortedData = data.map((country) => ({
+        name: country.name,
+        topTrends: country.top_trends
+          .sort((a, b) => b.count - a.count)
+          .slice(0, 5),
+      }));
+      
+      const xAxisData = sortedData.map((country) => country.name);
+      const seriesData = sortedData.map((country) =>
+        country.topTrends.map((trend) => trend.count)
+      );
+      const legendData = sortedData[0]?.topTrends.map((trend) => trend.trend);
 
-    const option = {
-      backgroundColor: '#fff',
-      xAxis: {
-        type: 'category',
-        data: data.map((item) => item.name),
-        axisLabel: {
-          interval: 0,
-          rotate: 15,
-          margin: 2,
-          textStyle: {
-            color: '#333',
-            fontSize: 12,
+      chart.setOption({
+        title: {
+          text: 'Top Trends by Country',
+          left: 'center',
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow',
           },
         },
-      },
-      yAxis: {
-        type: 'value',
-        axisLabel: {
-          textStyle: {
-            color: '#333',
-            fontSize: 12,
-          },
+        legend: {
+          data: legendData,
+          top: 30,
         },
-      },
-      series: [
-        {
-          data: data.map((item) => item.top_trends.length),
+        grid: {
+          top: 80,
+          left: 20,
+          right: 20,
+          bottom: 20,
+          containLabel: true,
+        },
+        xAxis: {
+          type: 'category',
+          data: xAxisData,
+        },
+        yAxis: {
+          type: 'value',
+        },
+        series: seriesData.map((data, index) => ({
+          name: legendData[index],
           type: 'bar',
-          label: {
-            show: true,
-            position: 'top',
-            color: '#333',
-          },
-          itemStyle: {
-            color: function (params) {
-              return colors[params.dataIndex % colors.length];
-            },
-          },
-        },
-      ],
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-          type: 'shadow',
-        },
-      },
-    };
-
-
-    myChart.setOption(option);
-
-    return () => {
-      myChart.dispose(); // Clean up chart instance when component unmounts
-    };
+          data,
+        })),
+      });
+    }
   }, [data]);
 
-  return <div id="main" style={{ width: '100%', height: '600px' }}></div>;
+  return <div ref={chartRef} style={{ width: '100%', height: '500px' }} />;
 };
 
 export default GetBarChart;

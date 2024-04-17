@@ -1,91 +1,98 @@
-"use client"
-import React, { useEffect } from 'react';
-import * as echarts from 'echarts/core';
-import { CanvasRenderer } from 'echarts/renderers';
+import { useMemo } from 'react';
 import {
-  TitleComponent,
-  TooltipComponent,
-  GridComponent,
-  LegendComponent,
-} from 'echarts/components';
-// Import necessary charts
-import { BarChart } from 'echarts/charts';
-// Use necessary components
-echarts.use([
-  TitleComponent,
-  TooltipComponent,
-  GridComponent,
-  LegendComponent,
-  BarChart,
-  CanvasRenderer, // or SVGRenderer if you prefer
-]);
+  MaterialReactTable,
+  useMaterialReactTable,
+} from 'material-react-table';
+import { Box, Typography, useMediaQuery } from '@mui/material';
 
+const data = [
+  {
+    "followers": 1400000,
+    "hashtags": "الحفلات الغناييه",
+    "id": 1,
+    "languages": ["ar","en"],
+    "location": "المملكة العربية السعودية",
+    "regions": [
+      "Saudi Arabia",
+      "Lebanon",
+      "Qatar",
+      "Iraq",
+      "Oman",
+      "Iran",
+      "Bahrain"
+    ],
+    "username": "@TurkiasdShalhoub"
+  },
+  {
+    "followers": 1400000,
+    "hashtags": ["الحفلات الغناييه","الحفلات الغناييasdه"],
+    "id": 2,
+    "languages": "ar",
+    "location": "المملكة العربية السعودية",
+    "regions": ["Saudi Arabia"],
+    "username": "@TurkiShalhoub"
+  },
+]
 
-const GetBarChart = ({ data }) => {
-  useEffect(() => {
-    const chartDom = document.getElementById('main');
-    const myChart = echarts.init(chartDom, 'dark');
+const Table_for_influ = () => {
+  const isMobile = useMediaQuery('(max-width: 720px)');
 
-    const option = {
-      backgroundColor: '#fff',
-      yAxis: {
-        type: 'category', // Use 'category' type for the y-axis
-        data: data.map((item) => item.username),
-        axisLabel: {
-          interval: 0,
-          rotate: 5,
-          margin: 2,
-          textStyle: {
-            color: '#333',
-            fontSize: 12,
-          },
-        },
+  const columns = useMemo(
+    () => [
+      {
+        accessorKey: 'id',
+        header: 'ID',
+        size: 150,
       },
-      xAxis: {
-        type: 'value', // Use 'value' type for the x-axis
-        axisLabel: {
-          textStyle: {
-            color: '#333',
-            fontSize: 12,
-          },
-          formatter: '{value}%', // Display x-axis labels as percentage
-        },
+      {
+        accessorKey: 'username',
+        header: 'User Name',
+        size: 200,
       },
-      series: [
-        {
-          data: data.map((item) => item.standardized_score.toFixed(2)), // Format score to two decimal places
-          type: 'bar',
-          label: {
-            show: true,
-            position: 'right', // Position labels to the right of the bars
-            formatter: '{c}%', // Display label as percentage
-            color: '#333',
-          },
-          itemStyle: {
-            color: function (params) {
-              const colorList = ['#5470C6', '#EE6666', '#91CC75', '#FFB90F', '#73C0DE', '#3BA272', '#FF6666', '#3B8ADE', '#61A0A8', '#FFD700'];
-              return colorList[params.dataIndex % colorList.length];
-            },
-          },
-        },
-      ],
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-          type: 'shadow',
-        },
-        formatter: '{b}: {c}%', // Tooltip format
+      {
+        accessorKey: 'followers',
+        header: 'Followers',
+        size: 200,
       },
-    };
+      {
+        accessorKey: 'location',
+        header: 'Influencer Location',
+        size: 200.
+      },
+    ],
+    [],
+    //end
+  );
 
-    myChart.setOption(option);
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableColumnPinning: isMobile,
+    initialState: {
+      expanded: true,
+    },
+    state: {
+      columnPinning: isMobile ? { right: ['mrt-row-expand'] } : {},
+    },
+    renderDetailPanel: ({ row }) => (
+      <Box
+        sx={{
+          display: 'grid',
+          margin: 'auto',
+          gridTemplateColumns: '1fr 1fr',
+          width: '100%',
+        }}
+      >
+        <Typography>HashTags Used: {Array.isArray(row.original.hashtags) ? row.original.hashtags.join(', ') : row.original.hashtags}</Typography>
+        <Typography>Tweet Languages: {Array.isArray(row.original.languages) ? row.original.languages.join(', ') : row.original.languages}</Typography>
+        <Typography>Tweet Regions: {Array.isArray(row.original.regions) ? row.original.regions.join(', ') : row.original.regions}</Typography>
+      </Box>
+    ),
+    positionExpandColumn: 'last',
+  });
 
-    return () => {
-      myChart.dispose(); // Clean up chart instance when component unmounts
-    };
-  }, [data]);
-
-  return <div id="main" style={{ width: '100%', height: '600px' }}></div>;
+  return <MaterialReactTable table={table} />;
 };
 
-export default GetBarChart;
+export default Table_for_influ;
+

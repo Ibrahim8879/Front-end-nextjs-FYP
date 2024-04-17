@@ -32,6 +32,7 @@ const Sentimental_Analysis = () => {
               name={dataItem.language}
               value1={dataItem.positive_frequency}
               value2={dataItem.negative_frequency}
+              value3={dataItem.neutral_frequency}
             />
         ))}
         </div>

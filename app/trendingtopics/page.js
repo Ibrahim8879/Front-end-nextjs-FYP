@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import TrendsGraph from '@/components/Graph/trends_Barchart';
+import GetBarChart from '@/components/Graph/trends_Barchart';
 import LoadingSpinner from '@/components/Loading';
 
 const Trending_topics = () => {
@@ -40,7 +40,6 @@ const Trending_topics = () => {
         selectedData = null;
     }
   }
-  console.log(data)
 
   return (
     <div className="container mx-auto p-4 pt-20">
@@ -59,7 +58,7 @@ const Trending_topics = () => {
       <div className="mt-8 p-4 border border-gray-300 rounded">
         {data && data.length > 0 ? (
             <div>
-              <TrendsGraph data={selectedData} text={dataType}/>
+              <GetBarChart data={selectedData} text={dataType}/>
             </div>
           ) : (
             <LoadingSpinner />

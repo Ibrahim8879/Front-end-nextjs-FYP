@@ -33,7 +33,7 @@ const GetBarChart = ({ data }) => {
       backgroundColor: '#fff',
       xAxis: {
         type: 'category',
-        data: data.map((item) => item.language.toUpperCase()),
+        data: data.map((item) => item.language_tag.toUpperCase()),
         axisLabel: {
           interval: 0,
           rotate: 90,
@@ -49,7 +49,7 @@ const GetBarChart = ({ data }) => {
         axisLabel: {
           textStyle: {
             color: '#333',
-            fontSize: 12,
+            fontSize: 14,
           },
         },
       },
@@ -62,9 +62,8 @@ const GetBarChart = ({ data }) => {
             position: 'top',
             formatter: function (params) {
               const dataIndex = params.dataIndex;
-              const language = data[dataIndex].language.toUpperCase();
               const diversity = data[dataIndex].diversity;
-              return `${language}\n${diversity}`;
+              return `${diversity}`;
             },
             color: '#333',
           },
@@ -79,6 +78,12 @@ const GetBarChart = ({ data }) => {
         trigger: 'axis',
         axisPointer: {
           type: 'shadow',
+        },
+        formatter: function (params) {
+          const dataIndex = params[0].dataIndex;
+          const diversity = data[dataIndex].diversity;
+          const languageName = data[dataIndex].language_name;
+          return `Language: ${languageName}<br/>Diversity: ${diversity}%`;
         },
       },
     };

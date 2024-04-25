@@ -10,16 +10,16 @@ import { CanvasRenderer } from 'echarts/renderers';
 
 echarts.use([TitleComponent, TooltipComponent, LegendComponent, PieChart, CanvasRenderer]);
 
-const GetPieChart = ({ name, value1, value2, value3 }) => {
-  const chartId = `chart-${name}`;
-  const data = {"Positive": value1, "Negative": value2, "Neutral": value3};
+const PieChart_influ = ({ data, title }) => {
+  const chartId = `chart-${title}`;
+
   useEffect(() => {
     const chartDom = document.getElementById(chartId);
     const myChart = echarts.init(chartDom);
 
     const option = {
       title: {
-        text: name,
+        text: title,
         left: 'center',
       },
       tooltip: {
@@ -33,7 +33,7 @@ const GetPieChart = ({ name, value1, value2, value3 }) => {
       },
       series: [
         {
-          name: name,
+          name: title,
           type: 'pie',
           radius: '50%',
           center: ['50%', '60%'],
@@ -66,9 +66,9 @@ const GetPieChart = ({ name, value1, value2, value3 }) => {
     return () => {
       myChart.dispose();
     };
-  }, [ name, value1, value2, value3 ]);
+  }, [data, title]);
 
   return <div id={chartId} style={{ width: '100%', height: '400px' }} />;
 };
 
-export default GetPieChart;
+export default PieChart_influ;

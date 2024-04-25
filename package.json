@@ -17,6 +17,8 @@
     "@mui/x-date-pickers": "^7.2.0",
     "@react-three/drei": "^9.93.1",
     "@react-three/fiber": "^8.15.14",
+    "@visx/wordcloud": "^3.3.0",
+    "chart.js": "^4.4.2",
     "d3": "^7.8.5",
     "echarts": "^5.5.0",
     "material-react-table": "^2.12.1",
@@ -24,6 +26,7 @@
     "next": "14.0.4",
     "react": "^18",
     "react-chartjs-2": "^5.2.0",
+    "react-d3-cloud": "^1.0.6",
     "react-dom": "^18",
     "three": "^0.160.0"
   },

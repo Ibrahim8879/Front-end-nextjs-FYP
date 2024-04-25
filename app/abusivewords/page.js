@@ -5,6 +5,7 @@ import LoadingSpinner from "@/components/Loading"
 
 const Abusive_Words = () => {
   const [data, setData] = useState(null);
+  const [data2, setData2] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +19,12 @@ const Abusive_Words = () => {
           });
           return { ...item, all_words: modifiedWords };
         });
+        
+        const response2 = await fetch('http://127.0.0.1:5000/abusivewords_dictcount');
+        const jsonData2 = await response2.json();
+
         setData(modifiedData);
+        setData2(jsonData2);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -33,7 +39,7 @@ const Abusive_Words = () => {
          <div className="mt-8 p-4 border border-gray-700 rounded items-center">
          {data && data.length > 0 ? (
             <div>
-              <GetBarChart data={data} />
+              <GetBarChart data={data} data2={data2}/>
             </div>
           ) : (
             <LoadingSpinner />

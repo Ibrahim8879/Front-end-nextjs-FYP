@@ -1,13 +1,5 @@
 import Mui_Card from "./Single_card";
 
-/*
-<Mui_Card 
-            imageUrl={"/card_pictures/3.png"}
-            title={"Dataset Insights"}
-            description={"Explore user locations, trend regions, tweet languages, and hashtag-based histograms to uncover trends and patterns in the dataset."}
-            linkref='dataset'
-            />
-*/
 const Card_Section = () => {
   return (
     <div className="min-h-128">

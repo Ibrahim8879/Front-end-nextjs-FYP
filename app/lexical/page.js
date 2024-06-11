@@ -29,8 +29,8 @@ const Lexical_Analysis = () => {
     const fetchData = async () => {
       if (startDate && endDate) {
         try {
-          //const response = await fetch(`http://127.0.0.1:5000/lexical?startDate=${startDate}&endDate=${endDate}`);
-          const response = await fetch(`http://127.0.0.1:5000/lexical`);
+          const response = await fetch(`http://127.0.0.1:5000/lexical?startDate=${startDate}&endDate=${endDate}`);
+          //const response = await fetch(`http://127.0.0.1:5000/lexical`);
           const jsonData = await response.json();
           const sortedData = jsonData.language.sort((a, b) => b.diversity - a.diversity);
           const sortedData2 = jsonData.location.sort((a, b) => b.diversity - a.diversity);

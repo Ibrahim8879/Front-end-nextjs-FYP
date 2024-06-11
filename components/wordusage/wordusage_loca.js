@@ -55,8 +55,8 @@ const Word_Freq_Count_location = () => {
 
         setLoading(true);
         try {
-          //const response = await fetch(`http://127.0.0.1:5000/wordfrequency?country=${selectedCountry}?startDate=${startDate}&endDate=${endDate}`);
-          const response = await fetch(`http://127.0.0.1:5000/wordfrequency?country=${selectedCountry}`);
+          const response = await fetch(`http://127.0.0.1:5000/wordfrequency?country=${selectedCountry}&startDate=${startDate}&endDate=${endDate}`);
+          //const response = await fetch(`http://127.0.0.1:5000/wordfrequency?country=${selectedCountry}`);
           const jsonData = await response.json();
           console.log(jsonData);
           setData(jsonData);
@@ -84,7 +84,7 @@ const Word_Freq_Count_location = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 pt-20">
+    <div className="container mx-auto p-4 pt-20 h-full">
       <h1 className="text-2xl font-bold mb-4 text-white">Word Frequency Across Countries</h1>
       <div className="mt-8 p-4 border border-gray-700 rounded items-center bg-white">
         <h2 className="text-xl font-semibold mb-4">Please select a country from the options:</h2>

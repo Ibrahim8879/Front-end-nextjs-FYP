@@ -78,7 +78,7 @@ const GetBarChart = ({ data, data2 }) => {
             position: 'top',
             formatter: function (params) {
               const totalCount = params.value;
-              return `${totalCount}%`;
+              return `${totalCount}`;
             },
             color: '#333',
           },

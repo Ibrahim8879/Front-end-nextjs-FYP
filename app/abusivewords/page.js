@@ -28,8 +28,8 @@ const Abusive_Words = () => {
     const fetchData = async () => {
       if (startDate && endDate) {
         try {
-          //const response = await fetch(`http://127.0.0.1:5000/abusivewords?startDate=${startDate}&endDate=${endDate}`);
-          const response = await fetch('http://127.0.0.1:5000/abusivewords');
+          const response = await fetch(`http://127.0.0.1:5000/abusivewords?startDate=${startDate}&endDate=${endDate}`);
+          //const response = await fetch('http://127.0.0.1:5000/abusivewords');
           const jsonData = await response.json();
           const sortedData = jsonData.sort((a, b) => b.total_count - a.total_count);
           

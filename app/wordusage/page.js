@@ -11,7 +11,7 @@ const SimplePage = () => {
   };
 
   return (
-    <div className="justify-center items-center h-screen">
+    <div className="justify-center items-center h-full">
       <div className="text-center">
         <div>
             <h1 className="text-white text-4xl font-bold mb-4 mt-10">Select Word Cloud Source: </h1>
@@ -22,7 +22,7 @@ const SimplePage = () => {
               Word Cloud from Language
             </button>
         </div>
-        <div className=''>
+        <div className='h-full'>
           {selectedButton === 'location' && <Word_Freq_Count_location />}
           {selectedButton === 'language' && <Word_Freq_Count_language />}
         </div>

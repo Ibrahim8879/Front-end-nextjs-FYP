@@ -36,8 +36,8 @@ const Sentimental_Analysis = () => {
     const fetchData = async () => {
       if (startDate && endDate) {
         try {
-          //const response = await fetch(`http://127.0.0.1:5000/sentiments?startDate=${startDate}&endDate=${endDate}`);
-          const response = await fetch(`http://127.0.0.1:5000/sentiments`);
+          const response = await fetch(`http://127.0.0.1:5000/sentiments?startDate=${startDate}&endDate=${endDate}`);
+          //const response = await fetch(`http://127.0.0.1:5000/sentiments`);
           const jsonData = await response.json();
           setData(jsonData);
         } catch (error) {

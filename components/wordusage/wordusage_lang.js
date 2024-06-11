@@ -93,8 +93,8 @@ const Word_Freq_Count_language = () => {
 
         setLoading(true);
         try {
-          //const response = await fetch(`http://127.0.0.1:5000/wordfrequency?language=${selectedlanguage}?startDate=${startDate}&endDate=${endDate}`);
-          const response = await fetch(`http://127.0.0.1:5000/wordfrequency?language=${selectedlanguage}`);
+          const response = await fetch(`http://127.0.0.1:5000/wordfrequency?language=${selectedlanguage}&startDate=${startDate}&endDate=${endDate}`);
+          //const response = await fetch(`http://127.0.0.1:5000/wordfrequency?language=${selectedlanguage}`);
           const jsonData = await response.json();
           console.log(jsonData);
           setData(jsonData);

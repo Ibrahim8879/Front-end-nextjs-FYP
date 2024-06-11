@@ -3,6 +3,61 @@ import React, { useState, useEffect } from 'react';
 import GetBarChart from '@/components/Graph/trends_Barchart';
 import LoadingSpinner from '@/components/Loading';
 
+const twitter_tags = {
+  "eu": "European Union",
+  "ja": "Japanese",
+  "lv": "Latvian",
+  "dv": "Divehi (Maldivian)",
+  "fi": "Finnish",
+  "sl": "Slovenian",
+  "tr": "Turkish",
+  "da": "Danish",
+  "de": "German",
+  "et": "Estonian",
+  "hu": "Hungarian",
+  "in": "Indonesian",
+  "nl": "Dutch",
+  "sv": "Swedish",
+  "tl": "Tagalog (Filipino)",
+  "zh": "Chinese",
+  "ar": "Arabic",
+  "ca": "Catalan",
+  "cs": "Czech",
+  "en": "English",
+  "es": "Spanish",
+  "fr": "French",
+  "ht": "Haitian Creole",
+  "is": "Icelandic",
+  "it": "Italian",
+  "ko": "Korean",
+  "pl": "Polish",
+  "bn": "Bengali",
+  "ckb": "Central Kurdish (Sorani)",
+  "fa": "Persian (Farsi)",
+  "my": "Burmese",
+  "no": "Norwegian",
+  "pt": "Portuguese",
+  "ro": "Romanian",
+  "ru": "Russian",
+  "ps": "Pashto",
+  "sd": "Sindhi",
+  "ur": "Urdu",
+  "vi": "Vietnamese",
+  "iw": "Hebrew",
+  "ta": "Tamil",
+  "te": "Telugu",
+  "th": "Thai",
+  "hi": "Hindi",
+  "lt": "Lithuanian",
+  "or": "Odia (Oriya)",
+  "gu": "Gujarati",
+  "kn": "Kannada",
+  "si": "Sinhala",
+  "mr": "Marathi",
+  "ne": "Nepali",
+  "qct": "Question Canadian (Quebec)",
+  "ml": "Malayalam"
+}
 const TrendingTopics = () => {
   const [data, setData] = useState(null);
   const [dataType, setDataType] = useState(null);
@@ -81,7 +136,11 @@ const TrendingTopics = () => {
   const handleEndDateChange = (event) => {
     setEndDate(event.target.value);
   };
-
+  
+  function capitalizeFirstLetter(str) {
+    if (!str) return str; // Return if the string is empty or undefined
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
   return (
     <div className="container mx-auto p-4 pt-12">
       <h1 className="text-2xl font-bold mb-4 text-white">Trending Topics Analysis</h1>
@@ -98,6 +157,7 @@ const TrendingTopics = () => {
         </div>
       {dataType && (
         <div className="mt-8 p-4 border border-gray-300 rounded">
+          <p className="text-white">Trending Analysis Across {capitalizeFirstLetter(dataType)}.</p>
           <div className="mt-4">
             <label htmlFor="start-date" className="mr-2 text-white">Starting Date:</label>
             <select id="start-date" className="bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" value={startDate} onChange={handleStartDateChange}>
@@ -114,16 +174,24 @@ const TrendingTopics = () => {
               ))}
             </select>
           </div>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-4 pt-4">
             <select
               className="bg-gray-200 px-4 py-2 rounded"
               value={selectedOption || ''}
               onChange={handleOptionChange}
             >
               <option value="">Select an option</option>
-              {options.map((option, index) => (
-                <option key={index} value={option}>{option}</option>
-              ))}
+              {dataType === "languages"
+                ? Object.entries(twitter_tags).map(([key, value]) => (
+                    <option key={key} value={key}>
+                      {`${key} (${value})`}
+                    </option>
+                  ))
+                : options.map((option, index) => (
+                    <option key={index} value={option}>
+                      {option}
+                    </option>
+                  ))}
             </select>
           </div>
           <div className="mt-4">

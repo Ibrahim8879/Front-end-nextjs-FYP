@@ -4,9 +4,6 @@ import LoadingSpinner from "@/components/Loading";
 import WordCloud_freq from '@/components/Graph/Wordcloud';
 
 const twitter_tags = {
-  "qst": "Question Status",
-  "qht": "Question Hashtags",
-  "qme": "Question Mention",
   "eu": "European Union",
   "ja": "Japanese",
   "lv": "Latvian",
@@ -34,7 +31,6 @@ const twitter_tags = {
   "it": "Italian",
   "ko": "Korean",
   "pl": "Polish",
-  "und": "Undetermined (language not identified)",
   "bn": "Bengali",
   "ckb": "Central Kurdish (Sorani)",
   "fa": "Persian (Farsi)",
@@ -56,7 +52,6 @@ const twitter_tags = {
   "or": "Odia (Oriya)",
   "gu": "Gujarati",
   "kn": "Kannada",
-  "qam": "Question American",
   "si": "Sinhala",
   "mr": "Marathi",
   "ne": "Nepali",

@@ -28,7 +28,8 @@ const GetBarChart = ({ data, text }) => {
     if (chartRef.current && data) {
       const chart = echarts.init(chartRef.current);
 
-      const sortedData = data.sort((a, b) => b.count - a.count);
+      // Sort and slice data to get top 10 trends
+      const sortedData = data.sort((a, b) => b.count - a.count).slice(0, 10);
 
       const xAxisData = sortedData.map((trend) => trend.trend);
       const seriesData = sortedData.map((trend) => trend.count);
